@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "server",
   "main": "app.ts",
+  "typings": "app",
   "scripts": {
     "start": "npm run build && node disk/app.js",
     "dev": "nodemon src/app.ts",
