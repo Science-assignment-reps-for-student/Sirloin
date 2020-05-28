@@ -1,9 +1,9 @@
-import { Maintenance } from './maintenance/maintenance';
+import { MaintenanceCheck } from './maintenance/maintenance';
 
 import * as express from "express"
 
 const router = express.Router();
 
-router.use('/maintenance', Maintenance)
+router.use('/maintenance', MaintenanceCheck)
 
 export default router

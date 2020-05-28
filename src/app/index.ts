@@ -3,8 +3,10 @@ import cors from 'cors';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-
 import router from "./apis"
+import { createConnection, Any, Connection, ConnectionOptions } from "typeorm";
+import dbConfig from '../config/dbConfig'
+
 
 const app = express()
 
@@ -31,6 +33,9 @@ const registerExtensions = (app: any): void => {
           credentials: true,
         }),
     )
+     createConnection(dbConfig as ConnectionOptions).then(
+     ).catch(error => console.log(error));
+    
 }
 
 const settingApp = (app: any): any => {

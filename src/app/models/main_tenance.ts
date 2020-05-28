@@ -1,7 +1,10 @@
-import {Entity, Column} from "typeorm"
+import {Entity, Column, PrimaryGeneratedColumn, BaseEntity} from "typeorm"
 
-@Entity()
-export class Maintenance {
+@Entity({name: "main_tenance"})
+export class Maintenance{
+    @PrimaryGeneratedColumn()
+    id!: number;
+
     @Column()
     finish_at!: Date;
 

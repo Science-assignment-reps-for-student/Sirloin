@@ -1,6 +1,16 @@
 import { Request, Response } from 'express'
+import { getRepository } from 'typeorm'
+import { Maintenance } from '../../models/main_tenance'
 
-
-export const Maintenance = (req: Request, res: Response) => {
-  res.status(200).send({"status":"OK"})
-};
+export const MaintenanceCheck = async (req: Request, res: Response) => {
+    try {
+        const maintenanceList: Array<any> = await getRepository(Maintenance).find();
+        if (maintenanceList[0].is_tenance == false) {
+            res.status(202).send({"status":"Server is open :)"})
+        } else {
+            res.status(503).send({"status":"Server is in maintenance","finish_at":maintenanceList[0].finish_at})
+        }
+    } catch (e) {
+        res.status(500).send({"status":e})
+    }
+}
