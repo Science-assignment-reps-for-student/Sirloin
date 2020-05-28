@@ -14,9 +14,6 @@ const registerApis = (app: any): void => {
     app.use('/api', router)
 }
 
-const registerHooks = (app: any): void => {
-}
-
 const registerExtensions = (app: any): void => {
     app.use(compression());
     app.use(bodyParser.json());
@@ -40,7 +37,6 @@ const registerExtensions = (app: any): void => {
 
 const settingApp = (app: any): any => {
     registerApis(app)
-    registerHooks(app)
     registerExtensions(app)
 
     return app
