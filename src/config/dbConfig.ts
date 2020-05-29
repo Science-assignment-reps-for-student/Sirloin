@@ -7,6 +7,6 @@ export default {
     synchronize: true,
     logging: false,
     entities: [
-       "dist\\app\\models\\*.*"
+       "dist/app/models/*.*"
     ]
  }
