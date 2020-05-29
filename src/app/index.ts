@@ -1,38 +1,36 @@
-import express from "express";
-import cors from 'cors';
+import * as core from 'express-serve-static-core';
+
+import cors from 'cors'
+import express from 'express';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
-import router from "./apis"
-import { createConnection, Any, Connection, ConnectionOptions } from "typeorm";
-import dbConfig from '../config/dbConfig'
+
+import appConfig from '../config/appConfig'
+import router from './apis'
+import connectDB from './extensions/connectDatabase'
 
 
-const app = express()
-
-const registerApis = (app: any): void => {
+const registerApis = (app: core.Express): void => {
     app.use('/sirloin', router)
 }
 
-const registerExtensions = (app: any): void => {
+const registerExtensions = (app: core.Express): void => {
     app.use(compression());
     app.use(bodyParser.json());
-    app.use(
-        bodyParser.urlencoded({
-            extended: false,
-        }),
-    )
-    app.use(morgan('morgan'))
-    createConnection(dbConfig as ConnectionOptions).then(
-    ).catch(error => console.log(error));
-    
+    app.use(bodyParser.urlencoded({extended: false}))
+    app.use(morgan(appConfig.logLevel))
+    app.use(cors(appConfig.cors))
+    connectDB()
 }
 
-const settingApp = (app: any): any => {
-    registerApis(app)
-    registerExtensions(app)
+const createApp = (): core.Express => {
+    const app = express()
 
+    registerExtensions(app)
+    registerApis(app)
+    
     return app
 }
 
-export default settingApp(app)
+export default createApp()
