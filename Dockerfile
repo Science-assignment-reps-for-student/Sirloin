@@ -10,4 +10,4 @@ RUN npm install
 
 ENTRYPOINT ["npm", "start"]
 
-EXPOSE 5555
+EXPOSE 5410
