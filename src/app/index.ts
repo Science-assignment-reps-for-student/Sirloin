@@ -11,7 +11,7 @@ import dbConfig from '../config/dbConfig'
 const app = express()
 
 const registerApis = (app: any): void => {
-    app.use('/api', router)
+    app.use('/sirloin', router)
 }
 
 const registerExtensions = (app: any): void => {
