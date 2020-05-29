@@ -22,16 +22,9 @@ const registerExtensions = (app: any): void => {
             extended: false,
         }),
     )
-    app.use(morgan('dev'))
-    app.use(
-        cors({
-          origin: ["*"],
-          methods: ['GET', 'POST', 'PUT', 'DELETE'],
-          credentials: true,
-        }),
-    )
-     createConnection(dbConfig as ConnectionOptions).then(
-     ).catch(error => console.log(error));
+    app.use(morgan('morgan'))
+    createConnection(dbConfig as ConnectionOptions).then(
+    ).catch(error => console.log(error));
     
 }
 
